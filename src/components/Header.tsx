@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 export const Header = () => {
 
@@ -45,7 +45,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className={`fixed w-full z-50 transition-all diration-300 ${isScrolled ? 'bg-black/90 py-2' : 'bg-black/50 py-4'}`}>
+    <header className={`fixed w-full z-50 transition-all diration-300 ${isScrolled ? 'bg-black/90 py-2' : 'bg-transparent'}`}>
       <div className='container mx-auto p-8 flex items-center justify-between'>
         {/*Навигационное меню (левая часть)*/}
         <div className='flex items-center'>
@@ -79,7 +79,7 @@ export const Header = () => {
         </div>
 
         {/* Логотип */}
-        <div className='flex-shrink-0 mx-4'>
+        {/* <div className='flex-shrink-0 mx-4'>
           <Link 
             href='/' 
             className='block'
@@ -93,7 +93,7 @@ export const Header = () => {
               priority 
             />
           </Link>
-        </div>
+        </div> */}
                 {/* Соцсети (правая часть) */}
         <div className="flex items-center space-x-4">
           {socialLinks.map((item) => (
