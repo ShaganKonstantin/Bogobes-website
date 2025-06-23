@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-// import Image from 'next/image';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const Header = () => {
 
@@ -45,7 +46,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className={`fixed w-full z-50 transition-all diration-300 ${isScrolled ? 'bg-black/90 py-2' : 'bg-transparent'}`}>
+    <header className={`fixed w-full z-50 transition-all diration-300 ${isScrolled ? 'bg-black/60 py-2' : 'bg-transparent'}`}>
       <div className='container mx-auto p-8 flex items-center justify-between'>
         {/*Навигационное меню (левая часть)*/}
         <div className='flex items-center'>
@@ -79,22 +80,22 @@ export const Header = () => {
         </div>
 
         {/* Логотип */}
-        {/* <div className='flex-shrink-0 mx-4'>
+        <div className='flex-shrink-0 mx-4'>
           <Link 
             href='/' 
             className='block'
           >
             <Image 
-              src='/images/Logo_black.png' 
+              src='/images/Logos/Sign.PNG' 
               alt='Bogobes' 
-              width={120} 
+              width={120} // РАСТЯНУТЬ И ОТЦЕНТРОВАТЬ
               height={60} 
               className='h-12 w-auto' 
               priority 
             />
           </Link>
-        </div> */}
-                {/* Соцсети (правая часть) */}
+        </div>
+        {/* Соцсети (правая часть) */}
         <div className="flex items-center space-x-4">
           {socialLinks.map((item) => (
             <a
@@ -128,22 +129,29 @@ export const Header = () => {
           ))}
         </div>
         {/* Мобильное меню (появляется при нажатии на бургер) */}
-        {isMenuOpen && (
-          <div className='absolute top-full left-0 w-full bg-black/95 md:hidden shadow-lg'>
-            <nav className='flex flex-col py-4'>
-              {navItems.map((item) => (
-                <Link 
-                  key={item.name} 
-                  href={item.href} 
-                  className='px-4 py-3 text-white hover:bg-grey-800 transition-colors font-medium' 
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                {item.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className='absolute top-full left-0 w-full bg-black/95 md:hidden shadow-lg'>
+              <nav className='flex flex-col py-4'>
+                {navItems.map((item) => (
+                  <Link 
+                    key={item.name} 
+                    href={item.href} 
+                    className='px-4 py-3 text-white hover:bg-grey-800 transition-colors font-medium' 
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                  {item.name}
+                  </Link>
+                ))}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+ 
       </div>
     </header>
   );

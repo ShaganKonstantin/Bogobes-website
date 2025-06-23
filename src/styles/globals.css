@@ -13,3 +13,12 @@
   font-weight: 700;
   font-display: swap;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #f59e0b !important; /* yellow-400 */
+}
+
+.swiper-pagination-bullet-active {
+  background: #f59e0b !important;
+}
